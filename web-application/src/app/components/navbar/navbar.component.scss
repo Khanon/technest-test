@@ -1,0 +1,26 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar-row {
+    & button {
+        font-size: 20px;
+        height: 100%;
+    }
+}
+
+button.active {
+    color: rgb(202, 202, 202);
+}
+
+#server-status {
+    margin-right: 20px;
+}
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #fff;
+}
+
+#header {
+    padding: 10px 0px 0px 20px;
+}

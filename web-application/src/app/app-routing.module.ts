@@ -7,8 +7,8 @@ import { AccountsComponent } from './pages/accounts/accounts.component';
 const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'accounts', component: AccountsComponent},
-    { path: '', pathMatch: 'full', redirectTo: 'home' },
-    { path: '**', pathMatch: 'full', redirectTo: 'home' }
+    { path: '', pathMatch: 'full', redirectTo: 'accounts'/*'home'*/ },  // 8a8f restaurar
+    { path: '**', pathMatch: 'full', redirectTo: 'accounts'/*'home'*/ } // 8a8f restaurar
 ];
 
 @NgModule({
