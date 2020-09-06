@@ -4,6 +4,7 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 import { SocketService } from './socket.service';
 import { TableDataView } from '../models/view.model';
 import { CurrencyId } from '../models/currency.model';
+import { Transaction } from '../models/transaction.model';
 
 @Injectable({
     providedIn: 'root'
@@ -52,7 +53,36 @@ export class AccountsService {
 
             // Accounts update
             this.onAccounts$ = this.socketService.onAccounts().subscribe(accounts => {
-                this.accounts = accounts;
+                this.accounts = [];
+
+                // Parse data
+                for (const accountData of accounts) {
+                    const account = new Account();
+                    const transactions: Transaction[] = [];
+                    for (const transactionData of accountData.transactions) {
+                        const transaction = new Transaction();
+                        transaction.date = transactionData.date;
+                        transaction.id = transactionData.id;
+                        transaction.code = transactionData.code;
+                        transaction.type = transactionData.type;
+                        transaction.debit = transactionData.debit;
+                        transaction.credit = transactionData.credit;
+                        transaction.balance = transactionData.balance;
+                        transactions.push(transaction);
+                    }
+                    account.id = accountData.id;
+                    account.name = accountData.name;
+                    account.category = accountData.category;
+                    account.tags = accountData.tags;
+                    account.balance = accountData.balance;
+                    account.availableBalance = accountData.availableBalance;
+                    account.currency = accountData.currency;
+                    account.setTransactions = transactions;
+
+                    this.accounts.push(account);
+                }
+
+                // Update view
                 this.updateDataView();
             });
         } else {

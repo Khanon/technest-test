@@ -1,17 +1,31 @@
 import { Injectable } from '@angular/core';
 import { CoreService } from './core.service';
 import { SocketEvents } from '../models/socket.model';
-import { Account } from '../models/account.model';
+import { AccountInterface } from '../models/account.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SocketService {
-    constructor(private core: CoreService) { }
+    constructor(private core: CoreService) {
+        this.checkConnected();
+    }
 
     isConnected() {
         return this.core.socket.isConnected();
+    }
+
+    checkConnected() {
+        setTimeout(() => {
+            if (this.isConnected()) {
+                // Ask for initial data
+                this.getExchangeRate();
+                this.getAccounts();
+            } else {
+                this.checkConnected();
+            }
+        }, 3000);
     }
 
     /**
@@ -24,8 +38,8 @@ export class SocketService {
     /**
      * Receice accounts data
      */
-    onAccounts(): Observable<Account[]> {
-        return this.core.socket.fromEvent<Account[]>(SocketEvents.ON_ACCOUNTS);
+    onAccounts(): Observable<AccountInterface[]> {
+        return this.core.socket.fromEvent<AccountInterface[]>(SocketEvents.ON_ACCOUNTS);
     }
 
     /**

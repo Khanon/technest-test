@@ -4,7 +4,7 @@
  */
 
 import { CurrencyId } from './currency.model';
-import { Transaction } from './transaction.model';
+import { Transaction, AccountTransactionInterface } from './transaction.model';
 
 export enum AccountCategories {
     NONE = 'none',
@@ -22,7 +22,7 @@ export enum AccountTags {
     IMPORTANT = 'important'
 }
 
-export interface AccountInterface {
+export interface AccountInterfaceBase {
     id: number;
     name: string;
     category: AccountCategories;
@@ -30,7 +30,14 @@ export interface AccountInterface {
     balance: number;
     availableBalance: number;
     currency: CurrencyId;
+}
+
+export interface AccountInterface extends AccountInterfaceBase {
     transactions: Transaction[];
+}
+
+export interface AccountServerInterface extends AccountInterfaceBase{
+    transactions: AccountTransactionInterface[];
 }
 
 export class Account {
@@ -68,6 +75,11 @@ export class Account {
 
     public set availableBalance(availableBalance: number) { this.data.availableBalance = availableBalance; }
     public get availableBalance(): number { return this.data.availableBalance; }
+
+    public set currency(currency: CurrencyId) { this.data.currency = currency; }
+    public get currency(): CurrencyId { return this.data.currency; }
+
+    public set setTransactions(transactions: Transaction[]) { this.data.transactions = transactions; }
 
     public get getBalanceCurrency(): CurrencyId { return this.data.currency; }
 

@@ -1,8 +1,8 @@
 import { SocketBase, SocketEvents } from '../models/socket.model';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Account, AccountCategories, AccountTags } from '../models/account.model';
+import { AccountCategories, AccountTags, AccountServerInterface } from '../models/account.model';
 import { CurrencyId } from '../models/currency.model';
-import { Transaction, AccountTransactionCodes, AccountTransactionTypes } from '../models/transaction.model';
+import { AccountTransactionCodes, AccountTransactionTypes, AccountTransactionInterface } from '../models/transaction.model';
 
 /**
  * Mock socket - Test
@@ -12,10 +12,10 @@ import { Transaction, AccountTransactionCodes, AccountTransactionTypes } from '.
 export class SocketMock extends SocketBase {
     /** Mock data */
     exchangeRate: number;
-    mockAccounts: Account[];
+    mockAccounts: AccountServerInterface[];
 
     /** Observables */
-    obsOnAccounts$: BehaviorSubject<Account[]>;
+    obsOnAccounts$: BehaviorSubject<AccountServerInterface[]>;
     obsOnExchangeRate$: BehaviorSubject<number>;
     obsUpdateExchangeRate$: BehaviorSubject<number>; // Stream the difference with currenet value
 
@@ -35,7 +35,7 @@ export class SocketMock extends SocketBase {
         } while (index < 50);
 
         // Create observables
-        this.obsOnAccounts$ = new BehaviorSubject<Account[]>(this.mockAccounts);
+        this.obsOnAccounts$ = new BehaviorSubject<AccountServerInterface[]>(this.mockAccounts);
         this.obsOnExchangeRate$ = new BehaviorSubject<number>(this.exchangeRate);
         this.obsUpdateExchangeRate$ = new BehaviorSubject<number>(this.exchangeRate);
 
@@ -67,8 +67,6 @@ export class SocketMock extends SocketBase {
                 return this.obsOnAccounts$ as Observable<any>;
             case SocketEvents.ON_EXCHANGE_RATE:
                 return this.obsOnExchangeRate$ as Observable<any>;
-            case SocketEvents.ON_TRANSACTIONS:
-                break;
             default:
                 return null;
         }
@@ -94,8 +92,8 @@ export class SocketMock extends SocketBase {
         }, (Math.random() * 10 + 5) * 1000);
     }
 
-    getRandomAccount(index: number): Account {
-        const transactions: Transaction[] = [];
+    private getRandomAccount(index: number): AccountServerInterface {
+        const transactions: AccountTransactionInterface[] = [];
         let timestamp: number = 1577899532 * 1000; // Dates from 1/1/2020
         let indexT = Math.round(Math.random() * 30);
         do {
@@ -104,28 +102,39 @@ export class SocketMock extends SocketBase {
             indexT--;
         } while (indexT > 0);
 
+        const rcategory = Math.random();
+        const category = (rcategory < 0.33) ? AccountCategories.EXPENSE :
+                         (rcategory < 0.66) ? AccountCategories.REVENUE :
+                                              AccountCategories.TREASURY;
+        const rtags = Math.random();
+        const tags = (rtags < 0.2) ? [AccountTags.FOREIGN, AccountTags.IMPORTANT] :
+                     (rtags < 0.4) ? [AccountTags.LOCAL, AccountTags.UNUSED] :
+                     (rtags < 0.6) ? [AccountTags.TEST] :
+                     (rtags < 0.8) ? [AccountTags.LOCAL, AccountTags.IMPORTANT] :
+                                     [AccountTags.REVISION, AccountTags.IMPORTANT];
+
         const balanceValue = (Math.random() + 1) * 100;
-        return new Account({
+        return {
             id: index,
-            name: `Mock acc ${index}`,
-            category: AccountCategories.NONE,
-            tags: [AccountTags.TEST],
+            name: `Mock Account ${index}`,
+            category,
+            tags,
             balance: balanceValue,
             availableBalance: balanceValue / 2,
             currency: CurrencyId.BITCOIN,
             transactions
-        });
+        };
     }
 
-    getRandomTransaction(timestamp: number): Transaction {
+    private getRandomTransaction(timestamp: number): AccountTransactionInterface {
         const rcode = Math.random();
         const code = (rcode < 0.33) ? AccountTransactionCodes.DEPOSIT :
-                     (rcode < 0.66) ? AccountTransactionCodes.ON_RAMP :
-                     AccountTransactionCodes.SETTLEMENT;
+            (rcode < 0.66) ? AccountTransactionCodes.ON_RAMP :
+                AccountTransactionCodes.SETTLEMENT;
         const rtype = Math.random();
         const type = (rtype < 0.5) ? AccountTransactionTypes.RECEIVED :
-                                     AccountTransactionTypes.SENT;
-        return new Transaction({
+            AccountTransactionTypes.SENT;
+        return {
             date: this.getDateString(timestamp),
             id: timestamp.toString(),
             code,
@@ -133,10 +142,10 @@ export class SocketMock extends SocketBase {
             debit: Math.random() * 100000,
             credit: Math.random() * 100000,
             balance: Math.random() * 100000
-        });
+        };
     }
 
-    getDateString(datetime: number): string {
+    private getDateString(datetime: number): string {
         const date = new Date(datetime);
         const todate = date.getDate();
         const tomonth = date.getMonth() + 1;

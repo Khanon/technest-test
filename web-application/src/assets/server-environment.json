@@ -1,6 +1,6 @@
 {
-    "use_mock_server": true,
+    "use_mock_server": false,
     "server_url": "http://localhost",
     "server_port": "3000",
-    "fake_loading_ms": 0
+    "fake_loading_ms": 3000
 }

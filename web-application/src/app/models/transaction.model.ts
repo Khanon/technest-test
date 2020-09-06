@@ -22,7 +22,7 @@ export interface AccountTransactionInterface {
 }
 
 export class Transaction {
-    private data: AccountTransactionInterface = {
+    public data: AccountTransactionInterface = {
         date: 'no_date',
         id: 'no_id',
         code: AccountTransactionCodes.NONE,
