@@ -1,29 +1,25 @@
-# WebApplication
+# Technest Senior Test by Lorenzo Portillo
 
-MAIN MAGE!!!!
+## What is it?
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+It is a test designed for Technest Senior job position, started on 04/09/2020 and fionished on 06/09/2020.
 
-## Development server
+This test follows the instructions of attached PDF senior-test.pdf.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<br>
 
-## Code scaffolding
+<strong>NOTE:</strong> About Part2 and Part3 of PDF, as BTC price is the same for all rows, the highlighting row is the one containing the Exchange Rate (Top bar), instead the accounts or transactions rows.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<br>
 
-## Build
+## How to run?
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+This test is designed to run on local machine (Windows 8/10).
 
-## Running unit tests
+To run it, follow next steps:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Install Node.js from the webpage [Node.js](https://nodejs.org/es/). Please choose the LTS version.
 
-## Running end-to-end tests
+- After install Node.js, execute <strong>install.bat</strong>.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- After the install has ended, execute <strong>start.bat</strong> to run the test. The Server will run automatically, and the Web-Application will be opened on your browser.
