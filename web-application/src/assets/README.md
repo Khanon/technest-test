@@ -2,7 +2,7 @@
 
 ## What is it?
 
-It is a test designed for Technest Senior job position, started on 04/09/2020 and fionished on 06/09/2020.
+It is a test designed for Technest Senior job position, started on 04/09/2020 and finished on 06/09/2020.
 
 This test follows the instructions of attached PDF senior-test.pdf.
 
