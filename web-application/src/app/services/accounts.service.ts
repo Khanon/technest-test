@@ -68,6 +68,7 @@ export class AccountsService {
                         transaction.debit = transactionData.debit;
                         transaction.credit = transactionData.credit;
                         transaction.balance = transactionData.balance;
+                        console.log("aki BALANCE = ", transaction.balance, transactionData.balance);
                         transactions.push(transaction);
                     }
                     account.id = accountData.id;

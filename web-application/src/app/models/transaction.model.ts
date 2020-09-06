@@ -56,7 +56,7 @@ export class Transaction {
     public set credit(credit: number) { this.data.credit = credit; }
     public get credit(): number { return this.data.credit; }
 
-    public set balance(balance: number) { this.data.debit = balance; }
+    public set balance(balance: number) { this.data.balance = balance; }
     public get balance(): number { return this.data.balance; }
 
     public get getCodeText(): string {

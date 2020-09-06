@@ -30,4 +30,4 @@ To run it, follow next steps:
 
 - <strong>npm install</strong> (on folder '/technest-test-master/web-application/')
 
-- After the install has ended, execute <strong>start_server.bat</strong> and <strong>start_web-application.bat</strong> to run the test. The Server will run automatically, and the Web-Application will be opened on your browser.
+- After the install has ended, execute <strong>start_server.bat</strong> and <strong>start_web-application.bat</strong> to run the test. The Server will run automatically, and the Web-Application will be opened on your browser (Do not close both consoles!).
