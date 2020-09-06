@@ -10,7 +10,7 @@ This test follows the instructions of PDF '/technest-test-master/senior-test.pdf
 
 <strong>NOTE:</strong> About Part2 and Part3 of PDF, as BTC price is the same for all rows, the highlighting row is the one containing the Exchange Rate (Top bar), instead the accounts or transactions rows.
 
-<br>
+<strong>NOTE:</strong> There is a fake loading of 3 seconds to show the Server Disconnected status on the begginig.
 
 ## How to run?
 
