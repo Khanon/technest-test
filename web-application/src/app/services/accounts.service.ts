@@ -26,7 +26,6 @@ export class AccountsService {
     obsUpdateExchangeRate$: BehaviorSubject<number>;
 
     constructor(private socketService: SocketService) {
-        this.exchangeRate = 0;
         this.obsUpdateExchangeRate$ = new BehaviorSubject<number>(this.exchangeRate);
         this.initDataView();
         this.hookSubscriptions();
@@ -44,7 +43,7 @@ export class AccountsService {
 
     hookSubscriptions() {
         // Wait the socket connected to hook subscriptions
-        if (this.socketService.isConnected()) {
+        if (this.socketService && this.socketService.isConnected()) {
             // Exchange rate update
             this.onExchangeRate$ = this.socketService.onExchangeRate().subscribe(exchangeRate => {
                 this.obsUpdateExchangeRate$.next(exchangeRate - this.exchangeRate);
@@ -86,7 +85,7 @@ export class AccountsService {
                 this.updateDataView();
             });
         } else {
-            setTimeout(this.hookSubscriptions, 3000);
+            setTimeout(this.hookSubscriptions.bind(this), 1000);
         }
     }
 

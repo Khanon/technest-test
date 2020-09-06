@@ -22,7 +22,6 @@ export class AccountsTableComponent implements OnInit {
     }
 
     onElementClick(account: Account) {
-        const transactions = account.getTransactions;
         this.emitDataViewDetail.emit(account);
     }
 

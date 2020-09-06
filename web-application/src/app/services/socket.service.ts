@@ -13,7 +13,11 @@ export class SocketService {
     }
 
     isConnected() {
-        return this.core.socket.isConnected();
+        if (this.core.socket) {
+            return this.core.socket.isConnected();
+        } else {
+            return false;
+        }
     }
 
     checkConnected() {

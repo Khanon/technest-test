@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from '../../models/account.model';
 import { CoreService } from '../../services/core.service';
+import { AccountsService } from '../../services/accounts.service';
 
 @Component({
     selector: 'app-accounts',
@@ -12,7 +13,7 @@ export class AccountsComponent implements OnInit {
     dataViewDetailShow: boolean;
     dataViewDetailAccount: Account;
 
-    constructor(private core: CoreService) {
+    constructor(private core: CoreService, private accountsService: AccountsService) {
         this.dataViewDetailShow = false;
     }
 
@@ -20,7 +21,7 @@ export class AccountsComponent implements OnInit {
     }
 
     isSocketConnected(): boolean {
-        return this.core.isSocketConnected();
+        return this.core.isSocketConnected() && this.accountsService.exchangeRate !== undefined;
     }
 
     onDataViewDetail(account: Account): void {
