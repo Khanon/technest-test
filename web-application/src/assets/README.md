@@ -20,6 +20,14 @@ To run it, follow next steps:
 
 - Install Node.js from the webpage [Node.js](https://nodejs.org/es/). Please choose the LTS version.
 
-- After install Node.js, execute <strong>install.bat</strong>.
+- After install Node.js, execute the following comands on a windows console (please ensure you are in the indicated folder):
+
+- /technest-test-master/npm install -g @angular/cli
+
+- /technest-test-master/npm install -g @nestjs/cli
+
+- /technest-test-master/server/npm i
+
+- /technest-test-master/web-application/npm i
 
 - After the install has ended, execute <strong>start.bat</strong> to run the test. The Server will run automatically, and the Web-Application will be opened on your browser.
