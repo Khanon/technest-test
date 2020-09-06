@@ -4,7 +4,7 @@
 
 It is a test designed for Technest Senior job position, started on 04/09/2020 and finished on 06/09/2020.
 
-This test follows the instructions of attached PDF senior-test.pdf.
+This test follows the instructions of PDF (/technest-test-master/senior-test.pdf).
 
 <br>
 
