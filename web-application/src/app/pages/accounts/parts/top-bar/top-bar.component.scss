@@ -1,0 +1,43 @@
+$background-color: #f9f9f9;
+
+#exchange-rate-container {
+    text-align: center;
+    padding: 12px;
+    background-color: $background-color;
+}
+
+.blinking-green {
+    animation: blinkingToGreen 2.0s;
+}
+
+.blinking-red {
+    animation: blinkingToRed 2.0s;
+}
+
+@keyframes blinkingToGreen {
+    0% {
+        background-color: $background-color;
+    }
+
+    50% {
+        background-color: rgba(0, 199, 17, 0.5);
+    }
+
+    100% {
+        background-color: $background-color;
+    }
+}
+
+@keyframes blinkingToRed {
+    0% {
+        background-color: $background-color;
+    }
+
+    50% {
+        background-color: rgba(199, 0, 0, 0.5);
+    }
+
+    100% {
+        background-color: $background-color;
+    }
+}

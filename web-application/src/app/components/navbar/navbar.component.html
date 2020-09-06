@@ -6,9 +6,18 @@
     <mat-toolbar-row>
       <button mat-button routerLinkActive="active" routerLink="home">Home</button>
       <button mat-button routerLinkActive="active" routerLink="accounts">Accounts</button>
+      <button mat-button routerLinkActive="active" routerLink="instructions">Instructions</button>
       <span class="example-spacer"></span>
-      <div id="server-status">Server disconnected</div>
-      <mat-spinner diameter="35"></mat-spinner>
+      <ng-content *ngIf="isServerConnected(); then connected else disconnected"></ng-content>
     </mat-toolbar-row>
   </mat-toolbar>
 </p>
+
+<ng-template #connected>
+    <div id="server-status">Connected</div>
+</ng-template>
+
+<ng-template #disconnected>
+    <div id="server-status">Server disconnected</div>
+    <mat-spinner diameter="35"></mat-spinner>
+</ng-template>

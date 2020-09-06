@@ -1,4 +1,6 @@
 export interface Environment {
     use_mock_server: boolean;
-    connecting_time: number;
+    server_url: string;
+    server_port: string;
+    fake_loading_ms: number;
 }

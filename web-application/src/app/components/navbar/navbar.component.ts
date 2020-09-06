@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoreService } from '../../services/core.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor() { }
+  constructor(private core: CoreService) { }
 
   ngOnInit(): void {
+  }
+
+  isServerConnected(): boolean {
+      return this.core.isSocketConnected();
   }
 }

@@ -3,20 +3,32 @@ import { Account } from '../../models/account.model';
 import { CoreService } from '../../services/core.service';
 
 @Component({
-  selector: 'app-accounts',
-  templateUrl: './accounts.component.html',
-  styleUrls: ['./accounts.component.scss']
+    selector: 'app-accounts',
+    templateUrl: './accounts.component.html',
+    styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit {
-  accounts: Account[];
+    accounts: Account[];
+    dataViewDetailShow: boolean;
+    dataViewDetailAccount: Account;
 
-  constructor(private core: CoreService) {
-  }
+    constructor(private core: CoreService) {
+        this.dataViewDetailShow = false;
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  isServerAlive(): boolean {
-      return this.core.isServerAlive();
-  }
+    isSocketConnected(): boolean {
+        return this.core.isSocketConnected();
+    }
+
+    onDataViewDetail(account: Account): void {
+        this.dataViewDetailShow = true;
+        this.dataViewDetailAccount = account;
+    }
+
+    detailsViewOnclose() {
+        this.dataViewDetailShow = false;
+    }
 }

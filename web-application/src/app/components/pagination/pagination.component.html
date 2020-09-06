@@ -1,0 +1,10 @@
+<div>
+  <mat-paginator
+    [length]="dataView.length"
+    [pageSize]="dataView.pageSize"
+    [pageIndex]="dataView.pageIndex"
+    [pageSizeOptions]="dataView.pageSizeOptions"
+    (page)="updatePageConfig($event)"
+  >
+  </mat-paginator>
+</div>
