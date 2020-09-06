@@ -36,7 +36,7 @@ export class AccountsService {
             length: 0,
             pageSize: 10,
             pageIndex: 0,
-            pageSizeOptions: [5, 10],
+            pageSizeOptions: [5, 10, 15],
             data: []
         };
     }
